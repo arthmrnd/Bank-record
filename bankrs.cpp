@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<cstdlib>
+#include<stdlib.h>
 
 using std::cout;
 using std::cin;
@@ -49,7 +50,7 @@ void accountQuery::showData()
     cout<<"Account Number: "<<accountNumber<<endl;
     cout<<"First Name: "<<firstName<<endl;
     cout<<"Last Name: "<<lastName<<endl;
-    cout<<"Current Balance: R$."<<total_Balance<<endl;
+    cout<<"Current Balance: R$ "<<total_Balance<<endl;
     cout<<"------------------------------"<<endl;
 }
 
@@ -105,7 +106,7 @@ void accountQuery::searchRec()
     cin>>n;
     infile.seekg((n-1)*sizeof(*this));
     infile.read(reinterpret_cast<char *>(this), sizeof(*this));
-    showData;
+    showData();
 }
 
 //Editar os Registros | Edit Records
@@ -174,3 +175,58 @@ void accountQuery::deleteRec()
 
 //Função principal
 
+int main()
+{
+    accountQuery chs;
+    int choice;
+    cout<<"\t***Account Information System***"<<endl;
+    while (true)
+    {
+        cout<<"\nSelect one of this options below \n";
+        cout<<"\n\t1 > Add a record";
+        cout<<"\n\t2 > Show records";
+        cout<<"\n\t3 > Search record";
+        cout<<"\n\t4 > Update record";
+        cout<<"\n\t5 > Delete record";
+        cout<<"\n\t6 > Quit";
+        cout<<"\nType you choice:   ";
+        cin>>choice;
+        switch (choice)
+        {
+        case 1:
+            system("cls");
+            chs.writeRec();
+            system("cls");
+            break;
+        case 2:
+            system("cls");
+            chs.showData();
+            system("cls");
+            break;
+        case 3:
+            system("cls");
+            chs.searchRec();
+            system("cls");
+            break;
+        case 4:
+            system("cls");
+            chs.editRec();
+            system("cls");
+            break;
+        case 5:
+            system("cls");
+            chs.deleteRec();
+            system("cls");
+            break;
+        case 6:
+            exit(0);
+            break;
+        default:
+            cout<<"\n\t---Enter a valid choice---\n\n";
+            break;
+        }
+        
+    }
+    system("pause");
+    return 0;
+}
